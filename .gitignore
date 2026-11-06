@@ -1,0 +1,36 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets and local config — never commit these
+.env
+*.env
+*credentials*
+*secret*
+*.key
+*.pem
+
+# KiCad backups and lock files
+*-backups/
+*.kicad_prl
+*.kicad_sch-bak
+fp-info-cache
+sym-lib-table
+fp-lib-table
+
+# Audio renders and model caches (regenerable)
+*.wav
+!**/README.wav
+models/
+*.onnx
+
+# Logs
+*.log

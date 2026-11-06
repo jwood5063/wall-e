@@ -1,0 +1,25 @@
+Part,Status,Spec_or_estimate_g,Measured_g,Count_in_robot_total,Note
+Hiwonder Tank Car Chassis Kit (encoder variant),Out for delivery 2026-11-06 ETA 2026-11-07,1200,,yes,Hiwonder spec: weight 1.2 kg max load 5 kg
+TalentCell 12V 6000 mAh pack (motor rail),Research pick not ordered,380,,yes,Plan: ~380 g
+Anker Laptop Power Bank 25K 165W A1695 (Pi rail),Research pick not ordered sale watch <=$105,595,,yes,Anker spec: 21.0 oz (595 g)
+Slamtec RPLIDAR C1,Chosen not ordered,110,,yes,Plan: ~110 g
+Benewake TF-Luna,Chosen not ordered,5,,yes,Plan: C1 + TF-Luna approx 115 g
+Orbbec Gemini 2 depth camera,Planned not ordered,98,,yes,Plan: 98 g built-in IMU
+Ring Indoor Cam 1st Gen (eye),On hand,100,,yes,Plan: ~100 g class - estimate weigh it
+Raspberry Pi 5,On hand,,,yes,Weigh bare then with HAT fitted
+ReSpeaker 2-Mics Pi HAT V2.0,On hand,,,yes,
+Raspberry Pi Pico (sequencer),On hand,,,yes,
+Raspberry Pi Pico 2 W,On hand unassigned,,,yes,Only count if it rides on the robot
+ESP32-S3-WROOM (head hub),On hand,,,yes,
+Cytron MDD10A motor driver,Delivered 2026-10-31,,,yes,
+Adafruit speaker #3351,Delivered 2026-10-29; amp fitted 2026-11-05,,,yes,Amp fitted - weigh speaker + amp together and count both
+Raspberry Pi Global Shutter Camera + 6mm CS lens,Out of stock stock watch running,,,yes,Weigh when it lands
+Hiwonder 2 DoF Pan Tilt Kit (brackets + 2x LD-1501MG),Picked not ordered $83.99,,,yes,
+7-inch chest display + dedicated display Pi,Not ordered,,,yes,Weigh as one assembly
+Thermal sensors 6x DS18B20 + MCP9808 + SHT41,Specified not ordered,,,yes,Weigh as one bag then fitted
+Dock charge connector robot side (Adafruit magnetic 4-pin),Phase 2 buy,,,yes,
+Wiring cables fasteners power distribution,,,,yes,Weigh the harness as built
+Printed shell / body,Phase 3 Jim's own design,,,yes,Weigh cardboard/foam mockup first
+Printed head pods + lidar pedestal,Design locked,,,yes,
+e-con See3CAM_CU30_CHL_TC_BX,On hand,,,no,BENCH ONLY - do not count in robot total
+Xbox Wireless Controller,On hand,,,no,Handheld - do not count
