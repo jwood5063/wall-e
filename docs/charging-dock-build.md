@@ -11,7 +11,7 @@ The charger lives in the dock, not on the robot. The dock holds a 12.6V CC/CV su
 | Part | Role | Price / source | Status |
 |---|---|---|---|
 | Adafruit DIY Magnetic Connector — Right Angle Four Contact Pins (#5358) | Dock + robot contact pair | $6.50, Adafruit | Chosen, not ordered |
-| SparkFun Constant Current Power Supply — 12.6V 10A (COM-18335) | Dock charger (3S Li-ion, CC/CV) | $43.50, SparkFun | Chosen, not ordered |
+| SparkFun Constant Current Power Supply — 12.6V 10A (PRT-18722) | Dock charger (3S Li-ion, CC/CV) | $43.50, SparkFun | Chosen, not ordered |
 | DC wall supply, 24V / ≥3A, barrel or screw terminals | Feeds the SparkFun board (it takes 8–36V DC in; it is a board, not a wall wart) | ~$15 generic | To source with the Phase 2 buy |
 | Adafruit INA219 breakout (#904) — optional | Precise charge-current sensing on I2C, if the Pico ADC read-back isn't clean enough | $9.95, Adafruit | Optional |
 | Inline fuse holders + fuses, 3A | One in the dock output line, one on the robot charge input | ~$5 | Consumable |

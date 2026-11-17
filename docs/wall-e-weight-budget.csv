@@ -1,11 +1,12 @@
 Part,Status,Spec_or_estimate_g,Measured_g,Count_in_robot_total,Note
-Hiwonder Tank Car Chassis Kit (encoder variant),Out for delivery 2026-11-06 ETA 2026-11-07,1200,,yes,Hiwonder spec: weight 1.2 kg max load 5 kg
+Hiwonder Tank Car Chassis Kit (encoder variant),Delivered 2026-11-06 assembled 2026-11-08,1200,1371,yes,Hiwonder spec: weight 1.2 kg max load 5 kg; as completed by Jim 2026-11-08 WITHOUT extra metal trays: 1371 g (full kit weighed 1584 g incl 22 g bundled board)
+Hiwonder kit motor controller board (bundled),Came with chassis kit,,22,no,NOT USED in this design - Cytron MDD10A drives the motors instead; count only if fitted
 TalentCell 12V 6000 mAh pack (motor rail),Research pick not ordered,380,,yes,Plan: ~380 g
-Anker Laptop Power Bank 25K 165W A1695 (Pi rail),Research pick not ordered sale watch <=$105,595,,yes,Anker spec: 21.0 oz (595 g)
+Anker Laptop Power Bank 25K 165W A1695 (Pi rail),Bought used $97 2026-11-07,595,591,yes,Weighed by Jim 2026-11-09: 591 g (spec 595 g)
 Slamtec RPLIDAR C1,Chosen not ordered,110,,yes,Plan: ~110 g
 Benewake TF-Luna,Chosen not ordered,5,,yes,Plan: C1 + TF-Luna approx 115 g
 Orbbec Gemini 2 depth camera,Planned not ordered,98,,yes,Plan: 98 g built-in IMU
-Ring Indoor Cam 1st Gen (eye),On hand,100,,yes,Plan: ~100 g class - estimate weigh it
+Ring Indoor Cam 1st Gen (eye),On hand,100,57,yes,MEASURED by Jim 2026-11-08: 57 g (estimate was ~100 g)
 Raspberry Pi 5,On hand,,,yes,Weigh bare then with HAT fitted
 ReSpeaker 2-Mics Pi HAT V2.0,On hand,,,yes,
 Raspberry Pi Pico (sequencer),On hand,,,yes,
@@ -13,6 +14,7 @@ Raspberry Pi Pico 2 W,On hand unassigned,,,yes,Only count if it rides on the rob
 ESP32-S3-WROOM (head hub),On hand,,,yes,
 Cytron MDD10A motor driver,Delivered 2026-10-31,,,yes,
 Adafruit speaker #3351,Delivered 2026-10-29; amp fitted 2026-11-05,,,yes,Amp fitted - weigh speaker + amp together and count both
+Pavv 6DOF arm kit (bench test mule),Delivered 2026-11-08 assembled 2026-11-09,,701,yes,Built and working per Jim 2026-11-09: 701 g as assembled; could be lighter mounted directly to chassis; servo holding strength open (sag test pending)
 Raspberry Pi Global Shutter Camera + 6mm CS lens,Out of stock stock watch running,,,yes,Weigh when it lands
 Hiwonder 2 DoF Pan Tilt Kit (brackets + 2x LD-1501MG),Picked not ordered $83.99,,,yes,
 7-inch chest display + dedicated display Pi,Not ordered,,,yes,Weigh as one assembly
