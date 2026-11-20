@@ -2956,6 +2956,344 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Diode:BAT54C"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0.635 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "BAT54C"
+				(at -6.35 3.175 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 1.905 3.175 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "http://www.diodes.com/_files/datasheets/ds11005.pdf"
+				(at -2.032 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "dual schottky barrier diode, common cathode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "schottky diode common cathode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "BAT54C_0_1"
+				(polyline
+					(pts
+						(xy -3.175 -1.27) (xy -3.175 1.27) (xy -1.27 0) (xy -3.175 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.905 1.27) (xy -1.905 1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.905 0) (xy 1.905 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.905 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy -3.81 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -0.635 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -1.27) (xy -0.635 -1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.635 -1.27) (xy 0.635 -1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.905 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 0.635 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.905 1.27) (xy 1.905 1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.175 -1.27) (xy 3.175 1.27) (xy 1.27 0) (xy 3.175 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.81 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "BAT54C_1_1"
+				(pin passive line
+					(at -7.62 0 0)
+					(length 3.81)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 90)
+					(length 5.08)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "MCU_Module:RaspberryPi_Pico"
 			(pin_names
 				(offset 0.762)
@@ -5387,6 +5725,12 @@
 		(uuid "5cc18bcb-d05a-41f7-a05b-a8a905d0bbb8")
 	)
 	(junction
+		(at 224.79 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "61647cf1-d660-485e-bd79-135134cda724")
+	)
+	(junction
 		(at 81.28 83.82)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5601,6 +5945,10 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fccc2926-0ba3-4928-936f-4b413febae8e")
+	)
+	(no_connect
+		(at 265.43 118.11)
+		(uuid "21374f8e-d427-4621-bf27-8f1cd20124dc")
 	)
 	(no_connect
 		(at 231.14 41.91)
@@ -6468,6 +6816,16 @@
 	)
 	(wire
 		(pts
+			(xy 264.16 129.54) (xy 264.16 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4eeebe83-e7db-4143-b90b-ead4b82bd29c")
+	)
+	(wire
+		(pts
 			(xy 200.66 114.3) (xy 200.66 134.62)
 		)
 		(stroke
@@ -7028,6 +7386,16 @@
 	)
 	(wire
 		(pts
+			(xy 224.79 118.11) (xy 250.19 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84bd8ead-5fa2-4e1a-a604-1c22d8ca1966")
+	)
+	(wire
+		(pts
 			(xy 255.27 95.25) (xy 266.7 95.25)
 		)
 		(stroke
@@ -7075,6 +7443,16 @@
 			(type default)
 		)
 		(uuid "8b56292f-1aca-48ba-9a3e-72478e13f667")
+	)
+	(wire
+		(pts
+			(xy 264.16 125.73) (xy 267.97 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b995f76-3089-4835-b113-3a1dbba7f7c6")
 	)
 	(wire
 		(pts
@@ -7668,6 +8046,16 @@
 	)
 	(wire
 		(pts
+			(xy 224.79 81.28) (xy 224.79 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca19fbd4-cb7d-4db6-889d-cccebb62a7b5")
+	)
+	(wire
+		(pts
 			(xy 233.68 109.22) (xy 233.68 111.76)
 		)
 		(stroke
@@ -7768,6 +8156,16 @@
 	)
 	(wire
 		(pts
+			(xy 224.79 81.28) (xy 240.03 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d402b4fd-f976-408c-b59a-6773bc749f97")
+	)
+	(wire
+		(pts
 			(xy 29.21 111.76) (xy 93.98 111.76)
 		)
 		(stroke
@@ -7838,7 +8236,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 81.28) (xy 240.03 81.28)
+			(xy 209.55 81.28) (xy 224.79 81.28)
 		)
 		(stroke
 			(width 0)
@@ -8185,6 +8583,16 @@
 			(type default)
 		)
 		(uuid "f89831b7-c8c2-4c56-88ab-69527bdc02e3")
+	)
+	(wire
+		(pts
+			(xy 257.81 123.19) (xy 267.97 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f93a588c-a982-4f1b-b546-00ebc39a7e87")
 	)
 	(wire
 		(pts
@@ -9516,6 +9924,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 273.05 125.73 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2875a5e9-9b9d-44a0-9aff-194654f47c6c")
+		(property "Reference" "J22"
+			(at 274.32 123.1899 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "servo_en"
+			(at 274.32 125.7299 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 273.05 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 273.05 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 273.05 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "868946b8-1dd9-4ca0-b3e1-91a66cfe7f3a")
+		)
+		(pin "1"
+			(uuid "2df8ab0e-be9f-4fb2-85eb-e202a2daa7f2")
+		)
+		(instances
+			(project "manager"
+				(path "/11bd1068-884f-4000-aae5-2c6be6748f14"
+					(reference "J22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 45.72 165.1 180)
 		(unit 1)
@@ -10770,6 +11260,7 @@
 		)
 		(property "Value" "GND"
 			(at 242.57 119.38 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10889,16 +11380,16 @@
 			)
 		)
 		(pin "4"
-			(uuid "806e4687-af0c-4456-ac7a-62b827370a3c")
+			(uuid "806e4687-af0c-4456-ac7a-62b827370a3d")
 		)
 		(pin "3"
-			(uuid "671f72ab-9f2e-4087-82fc-3b1d45b04643")
+			(uuid "671f72ab-9f2e-4087-82fc-3b1d45b04644")
 		)
 		(pin "2"
-			(uuid "38bc3cfb-eae7-4488-a078-388175c23659")
+			(uuid "38bc3cfb-eae7-4488-a078-388175c2365a")
 		)
 		(pin "1"
-			(uuid "21351cad-e15b-4380-ac79-2d820b4f2cd0")
+			(uuid "21351cad-e15b-4380-ac79-2d820b4f2cd1")
 		)
 		(instances
 			(project "manager"
@@ -11056,16 +11547,16 @@
 			)
 		)
 		(pin "4"
-			(uuid "806e4687-af0c-4456-ac7a-62b827370a3c")
+			(uuid "806e4687-af0c-4456-ac7a-62b827370a3e")
 		)
 		(pin "3"
-			(uuid "671f72ab-9f2e-4087-82fc-3b1d45b04643")
+			(uuid "671f72ab-9f2e-4087-82fc-3b1d45b04645")
 		)
 		(pin "2"
-			(uuid "38bc3cfb-eae7-4488-a078-388175c23659")
+			(uuid "38bc3cfb-eae7-4488-a078-388175c2365b")
 		)
 		(pin "1"
-			(uuid "21351cad-e15b-4380-ac79-2d820b4f2cd0")
+			(uuid "21351cad-e15b-4380-ac79-2d820b4f2cd2")
 		)
 		(instances
 			(project "manager"
@@ -12652,6 +13143,85 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 264.16 129.54 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "837eeba2-da92-45b0-85ae-9a7b72ee65cb")
+		(property "Reference" "#PWR034"
+			(at 264.16 135.89 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 264.16 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 264.16 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 264.16 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 264.16 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0d7162db-e21c-4165-b8b7-214063182577")
+		)
+		(instances
+			(project "manager"
+				(path "/11bd1068-884f-4000-aae5-2c6be6748f14"
+					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 133.35 107.95 0)
 		(unit 1)
 		(body_style 1)
@@ -13544,7 +14114,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 223.52 104.394 0)
+			(at 228.854 101.6 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13752,6 +14322,90 @@
 			(project "manager"
 				(path "/11bd1068-884f-4000-aae5-2c6be6748f14"
 					(reference "#PWR023")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:BAT54C")
+		(at 257.81 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b50fab6e-27c1-4044-a939-cc7e1422f581")
+		(property "Reference" "D3"
+			(at 257.81 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BAT54C"
+			(at 257.81 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 259.715 114.935 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" "http://www.diodes.com/_files/datasheets/ds11005.pdf"
+			(at 255.778 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "dual schottky barrier diode, common cathode"
+			(at 257.81 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "3"
+			(uuid "cff1b9fc-3c22-4b3e-9492-14511cd029f6")
+		)
+		(pin "2"
+			(uuid "90c0f16b-b9bd-469a-84dc-2900409a0eaa")
+		)
+		(pin "1"
+			(uuid "333196da-25cf-4ce4-80d7-638b6d07c46c")
+		)
+		(instances
+			(project "manager"
+				(path "/11bd1068-884f-4000-aae5-2c6be6748f14"
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -14910,13 +15564,13 @@
 			)
 		)
 		(pin "1"
-			(uuid "b5b619b1-3366-41de-bb6e-2c907902219b")
+			(uuid "b5b619b1-3366-41de-bb6e-2c907902219c")
 		)
 		(pin "2"
-			(uuid "47c7fc7f-3c7d-4adb-b313-57ef01268426")
+			(uuid "47c7fc7f-3c7d-4adb-b313-57ef01268427")
 		)
 		(pin "3"
-			(uuid "23daeb94-bc7c-42b3-8800-d701da93d879")
+			(uuid "23daeb94-bc7c-42b3-8800-d701da93d87a")
 		)
 		(instances
 			(project "manager"
