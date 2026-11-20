@@ -36,17 +36,19 @@ flowchart TB
     subgraph ROBOT["Wall-E robot"]
         subgraph PWR["Power (see diagram 2)"]
             PACK["TalentCell YB12011000<br/>12V pack, switch ON permanently"]
-            ANKER["Anker A1695<br/>5V Pi rail, pass-through charge"]
+            WP["Witty Pi 5 HAT+ x2<br/>one per Pi, fed from 12V bus<br/>(Anker retired 2026-11-18)"]
             PCB["Power control PCB<br/>distribution + regulators (scope TBD)"]
             SEQ["Pico — sequencer + motor control<br/>+ thermal monitor (one firmware)"]
             PACK --> PCB
             PCB --> SEQ
+            PCB --> WP
         end
 
         PI5["Raspberry Pi 5 (main)<br/>ROS 2 + Nav2, wake word, STT/TTS,<br/>publishes status/telemetry topics, HA link"]
         DISPPI["Display Pi = second Raspberry Pi 5<br/>(on hand, Jim 2026-11-15)<br/>ROS 2 subscriber node + local web<br/>server + kiosk browser (decided 2026-11-16)"]
         PANEL["Waveshare 7inch DSI LCD (E) 1280x800<br/>ORDERED 2026-11-15, arriving Wed Nov 18<br/>mounts on tray front fascia (fit gated<br/>on fascia height, ~110mm needed)"]
-        ESP["ESP32-S3-WROOM<br/>ESPHome sensor/servo hub"]
+        ESP["ESP32-S3-WROOM<br/>ESPHome sensor/servo hub<br/>socketed on servo hub board"]
+        SHB["Servo hub board (custom PCB, 2026-11-18)<br/>6x servo connectors, 6.8V distribution,<br/>ESP32 logic regulator, INA219 servo current sense"]
         ARM["6DOF arm (Pavv mule now)<br/>6x servos, head rides the arm"]
         MDD["Cytron MDD10A<br/>dual motor driver"]
         MOT["2x JGB37-520 gear motors<br/>+ encoders (tracked chassis)"]
@@ -69,7 +71,10 @@ flowchart TB
         PI5 -.->|"wired Ethernet: ROS 2 topics<br/>(status / telemetry)"| DISPPI
         DISPPI -.->|"DSI"| PANEL
         ESP -.->|"6x PWM servo signals"| ARM
-        PCB -->|"6.8V servo rail (power only)"| ARM
+        PCB -->|"6.8V servo rail (via buck)"| SHB
+        SHB -->|"servo power (6.8V + GND)"| ARM
+        SEQ -.->|"servo EN (carrier J1 spare GPIO)"| SHB
+        SHB -.->|"INA219 servo current (I2C, on-board)"| ESP
         PI5 -.->|"USB/UART (sllidar_ros2)"| LIDAR
         PI5 -.->|"UART/I2C"| TFL
         PI5 -.->|"USB-C (power + data)"| GEM
@@ -124,9 +129,10 @@ flowchart LR
         SW2815["Pololu Big MOSFET Switch HP #2815<br/>motor rail switch<br/>ON from Pico GPIO14 (carrier J8)<br/>16A cont / 90A max"]
         MDD2["Cytron MDD10A<br/>5-30V in, 10A cont/ch"]
         MOT2["Drive motors L/R<br/>~2.4A stall each"]
-        BUCK68["Adjustable buck<br/>SERVO RAIL 6.8V<br/>~6A cont / 10A peak, Pico EN"]
-        ARM2["Arm servos x6<br/>power/ground only from this board;<br/>signals from ESP32-S3"]
-        BUCK5["Adjustable buck<br/>5V ACCESSORY rail, ~3A class"]
+        BUCK68["Adjustable buck<br/>SERVO RAIL 6.8V<br/>~6A cont / 10A peak"]
+        SHB2["Servo hub board (2026-11-18)<br/>6x servo distribution, ESP32 logic 5V reg,<br/>INA219 current sense, EN in from Pico"]
+        ARM2["Arm servos x6<br/>power + signals via servo hub board"]
+        BUCK5["5V ACCESSORY rail V5-ACC<br/>U5 AP63205WU on power PCB<br/>(landed 2026-11-18)"]
         RING2["Ring Indoor Cam Gen 1 (5V USB)"]
         TFL2["TF-Luna (5V)"]
         PICO2["Pico (always-on)<br/>fed first, before all rails"]
@@ -136,19 +142,25 @@ flowchart LR
         PACK2 --> HARD --> MAIN
         MAIN --> PICO2
         MAIN --> SW2815 --> MDD2 --> MOT2
-        MAIN --> BUCK68 --> ARM2
+        MAIN --> BUCK68 --> SHB2 --> ARM2
         MAIN --> BUCK5 --> RING2
         BUCK5 --> TFL2
         MAIN -.-> VSENSE
     end
 
-    subgraph PIRAIL["Pi rail (separate, off the power PCB by default)"]
-        ANKER2["Anker A1695 power bank<br/>USB-C PD, pass-through charging"]
+    subgraph PIRAIL["Pi power (via Witty Pi 5 HAT+, decided 2026-11-18)"]
+        WP1["Witty Pi 5 HAT+ (main Pi)<br/>VIN from power PCB J11 (F4 3A)<br/>schedule = WAIT; Pico toggles SWITCH"]
+        WP2["Witty Pi 5 HAT+ (display Pi)<br/>VIN from power PCB J12 (F5 3A)<br/>schedule = WAIT; Pico toggles SWITCH"]
         PI52["Raspberry Pi 5 + ReSpeaker HAT<br/>(+ MAX98357A amp off 5V header pins)"]
-        DISPPI2["Display Pi + fascia panel<br/>(power route TBD)"]
-        ANKER2 --> PI52
-        ANKER2 -.->|"TBD"| DISPPI2
+        DISPPI2["Display Pi + fascia panel<br/>(power via WP2)"]
+        WP1 --> PI52
+        WP2 --> DISPPI2
     end
+
+    MAIN -->|"12V Pi feeds (J11/J12)"| WP1
+    MAIN -->|"12V Pi feeds (J11/J12)"| WP2
+    PICO2 -.->|"SWITCH toggle pulses<br/>via carrier J21/J22 + 2N7002"| WP1
+    PICO2 -.->|"SWITCH toggle pulses<br/>via carrier J21/J22 + 2N7002"| WP2
 
     DCON -->|"mates when docked"| RCON
 ```
@@ -176,7 +188,7 @@ air hot → warn only.
 flowchart TB
     PI5["Raspberry Pi 5 — ROS 2 / Nav2<br/>velocity commands, nav goals,<br/>wake word, faster-whisper STT,<br/>Piper TTS via locked voice chain"]
     PICO["Pico (on carrier PCB 'Wall-E Monitor')<br/>PIO encoder counting, PWM gen,<br/>sequencer, watchdog, thermal"]
-    ESP["ESP32-S3-WROOM — ESPHome hub<br/>servo PWM, head/sensor extras"]
+    ESP["ESP32-S3-WROOM — ESPHome hub<br/>servo PWM, head/sensor extras<br/>socketed on servo hub board (2026-11-18)"]
     CLOUD2["Wally / Muse (cloud, via WiFi)<br/>conversation + high-level decisions"]
     HA2["Home Assistant (home Pi 5)<br/>state mirror, automations, 'go look'"]
 
@@ -231,9 +243,9 @@ status LEDs on GP0/1 mirror *measured* state.
 | 1 | TalentCell → power PCB | Power | DC5521 barrel, centre + | 9–12.6V, 6A max (3A cont caveat) |
 | 2 | Power PCB → #2815 → MDD10A | Power | 5mm terminal blocks | Raw battery, motor rail |
 | 3 | MDD10A → motors | Power | Carrier screw terminals → 6-pin JST | M+/M− per channel, 10A cont capable |
-| 4 | Power PCB → arm servos | Power | 3-pin 2.54mm headers ×6 | 6.8V + GND only (no signals) |
-| 5 | Power PCB → Ring cam, TF-Luna | Power | USB-A / pigtail (TBD at layout) | 5V accessory rail, ~3A class |
-| 6 | Anker → Pi 5 | Power | USB-C PD | 5V (PD profile; 5A appetite caveat, Witty Pi 5 open) |
+| 4 | Servo buck → servo hub board → arm servos | Power | Screw terminal in; 3-pin 2.54mm ×6 out | 6.8V rail, 6A cont / 10A peak; each servo gets power + its PWM at one connector |
+| 5 | Power PCB → Ring cam, TF-Luna | Power | J13 screw terminal (Ring, micro-USB pigtail) / J14 JST PH (TF-Luna) | 5V accessory rail V5-ACC (U5 AP63205WU, landed 2026-11-18) |
+| 6 | Power PCB → Witty Pi 5 HAT+ → Pi 5 (×2) | Power | J11/J12 KF350 screw terminals → hat VIN | 12V bus in; hat delivers 5V/5A to each Pi (decided 2026-11-18; Anker retired) |
 | 7 | Dock charger → dock connector | Power | Wire + 3A fuse | 12.6V, ~2A class |
 | 8 | Dock ↔ robot connector | Power | Adafruit #5358 magnetic pair | 1+2 = +12.6V, 3+4 = GND, fused both sides |
 | 9 | Robot connector → SSR → pack | Power | Wire + 3A fuse | Charge path, Pico-gated |
@@ -243,7 +255,7 @@ status LEDs on GP0/1 mirror *measured* state.
 | 13 | Pico → #2815 / SSR | Signal | Carrier J8 / J7 (JST PH 4-pin) | GP14 / GP15 enables |
 | 14 | Pico → DS18B20 bus | Signal | Carrier J14–J19 | 1-Wire DQ GP6, 4.7K pull-up |
 | 15 | Pico → MCP9808 / SHT41 | Data | Carrier J4/J5 | I2C GP4/GP5 |
-| 16 | ESP32-S3 → arm servos | Signal | GPIO header wiring | 6× PWM (pins in diagram 3) |
+| 16 | ESP32-S3 → arm servos | Signal | Via servo hub board connectors | 6× PWM (pins in diagram 3); 10k pull-downs on the hub board |
 | 17 | ESP32-S3 ↔ Pi 5 / HA | Data | WiFi (ESPHome) | Servo cmds, sensor states |
 | 18 | Pi 5 → RPLIDAR C1 | Data | USB/UART | sllidar_ros2, 360° scan |
 | 19 | Pi 5 → TF-Luna | Data | UART/I2C | 1D range, cliff/dock |
@@ -255,6 +267,9 @@ status LEDs on GP0/1 mirror *measured* state.
 | 25 | Display Pi → panel | Video | DSI | 1280×800 (if 7-inch panel; fascia TBD) |
 | 26 | Xbox controller → Pi 5 | Data | Bluetooth (xpadneo) | Teleop; A button = voice trigger (remap pending) |
 | 27 | Pi 5 ↔ Wally / HA / Ring | Data | WiFi | Cloud brain, HA link, Ring cloud/report-back |
+| 28 | Pico (carrier J1 spare GPIO) → servo hub board EN | Signal | 2-pin header | 3.3V logic, pulled down — servo rail off by default; Pico owns servo-rail authority (decided 2026-11-18) |
+| 29 | Servo hub INA219 → ESP32-S3 | Data | On-board I2C | Servo rail current (stall detection), addr 0x40 on the ESP32's own bus |
+| 30 | Pico → Witty Pi 5 SWITCH (×2) | Signal | Carrier J21/J22 JST PH → hat P2 header | 2N7002 open-drain pulse (~400 ms) = one button tap = toggle; hats in WAIT, Pico is the only wake authority |
 
 ---
 
@@ -267,15 +282,12 @@ status LEDs on GP0/1 mirror *measured* state.
 - **#2815 mounting** — on the power PCB or off-board, TBD at layout.
 - **Battery jack style** on the power PCB — panel DC5521 jack vs cut lead into screw
   terminals, TBD.
-- **Servo-rail enable authority** — Pico recommended (one fault authority); not locked.
 - **Regulator implementation** — XL4016-class modules vs designed-in converters, rev 1 TBD.
 - **Display** — fascia height still unmeasured; the ordered 7-inch panel's fit
   re-opens after that measurement. Display Pi is resolved (second Pi 5, on hand);
   its power route in the robot is still unassigned. Data architecture is DECIDED
   (2026-11-16): ROS 2 subscriber node on wired Ethernet; MQTT reserved for the
   Home Assistant bridge only (either Pi may host it).
-- **Witty Pi 5 HAT+** — candidate for true 5V/5A Pi power + managed scheduling; duty
-  split with the Pico sequencer open.
 - **Dock connector face** — rear/back-in (current lean) vs front/nose-in; decide before
   printing the robot-side mount. Anker dock top-up physical connection also open.
 - **Arm, keeper choice** — Pavv is the test mule; RoArm-M2-S is the leading keeper if
@@ -285,5 +297,14 @@ status LEDs on GP0/1 mirror *measured* state.
 - **INA219 (#904)** — optional, only if Pico ADC charge-current read-back isn't clean
   enough for the DOCKED test (voltage + >100 mA for 2 s).
 
-_Sync note: this diagram reflects decisions through 2026-11-16. When a TBD locks,
+_Sync note: this diagram reflects decisions through 2026-11-16, plus the servo hub
+board (third custom PCB) decided 2026-11-18: ESP32-S3 socketed on it, servo
+distribution and ESP32 logic power live there, INA219 servo current sense in the
+power board's circuit, and the servo-rail EN comes from the Pico via a carrier
+spare GPIO (the enable-authority TBD is closed). Also 2026-11-18: **Pi power is
+decided** — a Witty Pi 5 HAT+ on each Pi, fed from the 12V bus (power PCB
+J11/J12), toggled by the Pico via carrier MOSFETs, hats in WAIT; the Anker Pi
+rail and its PD top-up are retired/reverted and one TalentCell powers the whole
+system; the 5V accessory rail landed on the power PCB (U5, V5-ACC, J13/J14).
+Implementation detail: `wall-e-witty-pi-integration-checklist.md`. When a TBD locks,
 update the block here and the source note it came from in the same pass._

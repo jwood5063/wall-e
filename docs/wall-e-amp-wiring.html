@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:," />
+    <title>Wall-E MAX98357A Amp Wiring Schematic</title>
+    <style>
+      :root {
+        --bg: #0c1117;
+        --panel: #131b24;
+        --panel-2: #18222e;
+        --line: #2c3f52;
+        --ink: #e8eef4;
+        --muted: #9db0c0;
+        --faint: #6e8296;
+        --cyan: #38d6e8;
+        --red: #ff5a4e;
+        --orange: #ffa63d;
+        --amber: #ffc44d;
+        --grey-wire: #aab7c2;
+        --danger-bg: #33190f;
+        --danger-line: #b45a24;
+        --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 1480px; margin: 0 auto; padding: 28px 20px 48px; }
+
+      header.page-head { margin-bottom: 18px; }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        color: var(--cyan);
+        text-transform: uppercase;
+        margin: 0 0 8px;
+      }
+      h1 {
+        font-size: clamp(22px, 3.4vw, 34px);
+        line-height: 1.2;
+        margin: 0 0 10px;
+        font-weight: 700;
+      }
+      .lede { color: var(--muted); font-size: 16px; max-width: 900px; margin: 0; }
+      .lede strong { color: var(--ink); }
+
+      /* Legend */
+      .legend {
+        display: flex; flex-wrap: wrap; gap: 8px 18px;
+        font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+        margin: 18px 0 14px;
+      }
+      .legend span { display: inline-flex; align-items: center; gap: 7px; }
+      .swatch { width: 26px; height: 4px; border-radius: 2px; display: inline-block; }
+      .sw-cyan { background: var(--cyan); }
+      .sw-red { background: var(--red); }
+      .sw-grey { background: var(--grey-wire); }
+      .sw-orange { background: var(--orange); }
+      .sw-dash { background: repeating-linear-gradient(90deg, var(--grey-wire) 0 6px, transparent 6px 11px); height: 3px; }
+
+      /* Diagram */
+      .diagram-card {
+        background:
+          radial-gradient(circle, #1b2836 1px, transparent 1px) 0 0 / 22px 22px,
+          var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 10px 6px;
+        overflow: hidden;
+      }
+      .diagram-card svg { display: block; width: 100%; height: auto; }
+      .diagram-caption {
+        font-family: var(--mono); font-size: 12px; color: var(--faint);
+        padding: 8px 8px 10px; margin: 0;
+      }
+
+      /* Below-diagram sections */
+      .cols {
+        display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px;
+        margin-top: 20px;
+      }
+      @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+      section.panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 18px 20px;
+      }
+      section.panel h2 {
+        font-size: 16px; margin: 0 0 12px; font-weight: 700;
+      }
+      section.panel h2 .tag {
+        font-family: var(--mono); font-size: 11px; color: var(--cyan);
+        letter-spacing: 0.1em; text-transform: uppercase; margin-right: 8px;
+      }
+
+      table.wires { width: 100%; border-collapse: collapse; font-size: 14px; }
+      table.wires th, table.wires td {
+        text-align: left; padding: 8px 8px; vertical-align: top;
+        border-bottom: 1px solid #22303f;
+      }
+      table.wires th { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+      table.wires tr:last-child td { border-bottom: none; }
+      table.wires td.net { font-family: var(--mono); font-weight: 700; white-space: nowrap; }
+      .net-cyan { color: var(--cyan); }
+      .net-red { color: var(--red); }
+      .net-grey { color: var(--grey-wire); }
+      .net-orange { color: var(--orange); }
+      table.wires td.note { color: var(--muted); }
+
+      table.gain { width: 100%; border-collapse: collapse; font-size: 14px; font-family: var(--mono); }
+      table.gain td { padding: 7px 8px; border-bottom: 1px solid #22303f; }
+      table.gain tr:last-child td { border-bottom: none; }
+      table.gain td.db { text-align: right; font-weight: 700; color: var(--amber); white-space: nowrap; }
+      .setting-note { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+      .setting-note strong { color: var(--ink); }
+      .sd-warn { color: #ff9d94; }
+
+      .warning {
+        margin-top: 18px;
+        background: var(--danger-bg);
+        border: 1px solid var(--danger-line);
+        border-radius: 10px;
+        padding: 16px 20px;
+      }
+      .warning .w-title {
+        font-family: var(--mono); font-weight: 700; color: var(--amber);
+        letter-spacing: 0.08em; font-size: 13px; text-transform: uppercase; margin: 0 0 6px;
+      }
+      .warning p { margin: 0; font-size: 15.5px; }
+      .warning p strong { color: #ffd9a8; }
+
+      .notes { margin-top: 18px; }
+      .notes h2 { font-size: 16px; margin: 0 0 6px; }
+      .note-item { padding: 12px 0; border-bottom: 1px solid #22303f; }
+      .note-item:last-child { border-bottom: none; padding-bottom: 2px; }
+      .note-item h3 { font-size: 14.5px; margin: 0 0 4px; color: var(--cyan); font-family: var(--mono); font-weight: 700; }
+      .note-item p { margin: 0; color: var(--muted); font-size: 15px; }
+      .note-item p strong, .note-item p code { color: var(--ink); }
+      code { font-family: var(--mono); font-size: 0.92em; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="kicker">Wall-E · Voice Bench · Wiring Schematic</p>
+        <h1>Wall-E voice bench — MAX98357A amp added to the ReSpeaker HAT speaker</h1>
+        <p class="lede">The speaker <strong>moves off the ReSpeaker HAT's JST socket</strong> and onto a
+        MAX98357A I2S amp. The amp taps the <strong>same I2S playback bus</strong> the HAT codec already uses —
+        no new data path, no software change. Power is 5&nbsp;V from Pi header pin&nbsp;2.</p>
+      </header>
+
+      <div class="legend" aria-label="Wire color legend">
+        <span><i class="swatch sw-cyan"></i> I2S bus (shared)</span>
+        <span><i class="swatch sw-red"></i> 5V power</span>
+        <span><i class="swatch sw-grey"></i> Ground</span>
+        <span><i class="swatch sw-orange"></i> Speaker (bridge pair)</span>
+        <span><i class="swatch sw-dash"></i> Mic data — HAT only</span>
+      </div>
+
+      <div class="diagram-card">
+        <svg viewBox="0 0 1440 840" role="img" aria-label="Wiring schematic: Raspberry Pi 5 header pins feed the ReSpeaker HAT and a MAX98357A amplifier over a shared I2S bus; the amplifier drives the Adafruit 3351 speaker.">
+          <defs>
+            <style>
+              .blk { fill: #18222e; stroke: #33506e; stroke-width: 1.5; }
+              .blk-new { fill: #16281f; stroke: #3f7d54; stroke-width: 2; }
+              .inner { fill: #101922; stroke: #2c4256; stroke-width: 1; }
+              .ttl { font: 700 19px ui-monospace, Menlo, Consolas, monospace; fill: #e8eef4; }
+              .sub { font: 12.5px ui-monospace, Menlo, Consolas, monospace; fill: #9db0c0; }
+              .lbl { font: 13.5px ui-monospace, Menlo, Consolas, monospace; fill: #dbe6ef; }
+              .lbl-b { font: 700 13.5px ui-monospace, Menlo, Consolas, monospace; fill: #e8eef4; }
+              .small { font: 12px ui-monospace, Menlo, Consolas, monospace; fill: #9db0c0; }
+              .tiny { font: 11.5px ui-monospace, Menlo, Consolas, monospace; fill: #8499ab; }
+              .cyan { fill: #38d6e8; } .red { fill: #ff6f66; } .orange { fill: #ffa63d; }
+              .amber { fill: #ffc44d; } .grey { fill: #aab7c2; } .green { fill: #7ed491; }
+              .w-cyan { stroke: #38d6e8; stroke-width: 3; fill: none; }
+              .w-red { stroke: #ff5a4e; stroke-width: 3; fill: none; }
+              .w-grey { stroke: #aab7c2; stroke-width: 3; fill: none; }
+              .w-orange { stroke: #ffa63d; stroke-width: 3.5; fill: none; }
+              .w-dash { stroke: #7e93a5; stroke-width: 2.5; fill: none; stroke-dasharray: 7 5; }
+            </style>
+          </defs>
+
+          <!-- ===== Power rails routed over the top ===== -->
+          <path class="w-red" d="M 320 190 H 338 V 52 H 840 V 108" />
+          <path class="w-grey" d="M 320 235 H 364 V 80 H 962 V 108" />
+          <text class="lbl-b red" x="560" y="44">5V</text>
+          <text class="tiny" x="585" y="44">Pi pin 2 → Amp Vin</text>
+          <text class="lbl-b grey" x="560" y="72">GND</text>
+          <text class="tiny" x="600" y="72">Pi pin 6 → Amp GND</text>
+          <text class="small red" x="828" y="100" text-anchor="end">Vin</text>
+          <text class="small grey" x="974" y="100">GND</text>
+
+          <!-- ===== I2S bus: Pi -> HAT ===== -->
+          <path class="w-cyan" d="M 320 295 H 380" />
+          <path class="w-cyan" d="M 320 350 H 380" />
+          <path class="w-dash" d="M 320 405 H 378" />
+          <path class="w-cyan" d="M 320 460 H 380" />
+          <!-- ===== I2S bus: HAT -> Amp (fan-out continues) ===== -->
+          <path class="w-cyan" d="M 700 295 H 780" />
+          <path class="w-cyan" d="M 700 350 H 780" />
+          <path class="w-cyan" d="M 700 460 H 780" />
+          <!-- ===== Speaker pair: Amp -> Speaker ===== -->
+          <path class="w-orange" d="M 1100 300 H 1160" />
+          <path class="w-orange" d="M 1100 370 H 1160" />
+          <text class="lbl-b orange" x="1112" y="290">+</text>
+          <text class="lbl-b orange" x="1112" y="392">−</text>
+
+          <!-- ================= BLOCK 1: RASPBERRY PI 5 ================= -->
+          <rect class="blk" x="20" y="110" width="300" height="500" rx="10" />
+          <text class="ttl" x="40" y="145">RASPBERRY PI 5</text>
+          <text class="sub" x="40" y="167">40-pin header — relevant pins only</text>
+
+          <!-- pin rows -->
+          <g>
+            <rect class="inner" x="36" y="173" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="196"><tspan class="lbl-b">PIN 2</tspan> · 5V</text>
+            <circle cx="320" cy="190" r="5.5" fill="#ff5a4e" />
+          </g>
+          <g>
+            <rect class="inner" x="36" y="218" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="241"><tspan class="lbl-b">PIN 6</tspan> · GND</text>
+            <circle cx="320" cy="235" r="5.5" fill="#aab7c2" />
+          </g>
+          <g>
+            <rect class="inner" x="36" y="278" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="301"><tspan class="lbl-b">PIN 12</tspan> · GPIO18 · BCLK</text>
+            <circle cx="320" cy="295" r="5.5" fill="#38d6e8" />
+          </g>
+          <g>
+            <rect class="inner" x="36" y="333" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="356"><tspan class="lbl-b">PIN 35</tspan> · GPIO19 · LRCLK</text>
+            <circle cx="320" cy="350" r="5.5" fill="#38d6e8" />
+          </g>
+          <g opacity="0.55">
+            <rect class="inner" x="36" y="388" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="411"><tspan class="lbl-b">PIN 38</tspan> · GPIO20 · DIN</text>
+            <circle cx="320" cy="405" r="5.5" fill="#7e93a5" />
+          </g>
+          <g>
+            <rect class="inner" x="36" y="443" width="252" height="34" rx="5" />
+            <text class="lbl" x="48" y="466"><tspan class="lbl-b">PIN 40</tspan> · GPIO21 · DOUT</text>
+            <circle cx="320" cy="460" r="5.5" fill="#38d6e8" />
+          </g>
+
+          <text class="tiny" x="40" y="512">PIN 38 / GPIO20 = mic data INTO the Pi.</text>
+          <text class="tiny" x="40" y="530">Greyed = mics only; amp ignores it.</text>
+          <text class="tiny" x="40" y="562">HAT sits on this header (stacking header).</text>
+          <text class="tiny" x="40" y="580">Power + I2S pass straight through to it.</text>
+          <text class="tiny" x="40" y="598">All other 34 pins: not shown.</text>
+
+          <!-- ================= BLOCK 2: ReSpeaker HAT ================= -->
+          <rect class="blk" x="380" y="110" width="320" height="500" rx="10" />
+          <circle cx="380" cy="295" r="5" fill="#38d6e8" /><circle cx="700" cy="295" r="5" fill="#38d6e8" />
+          <circle cx="380" cy="350" r="5" fill="#38d6e8" /><circle cx="700" cy="350" r="5" fill="#38d6e8" />
+          <circle cx="380" cy="405" r="5" fill="#7e93a5" />
+          <circle cx="380" cy="460" r="5" fill="#38d6e8" /><circle cx="700" cy="460" r="5" fill="#38d6e8" />
+          <text class="ttl" x="400" y="145">ReSpeaker 2-Mics HAT</text>
+          <text class="sub" x="400" y="167">V2.0 · stacked on the Pi header</text>
+
+          <!-- mics -->
+          <circle cx="445" cy="198" r="19" fill="#101922" stroke="#2c4256" />
+          <circle cx="445" cy="198" r="7" fill="none" stroke="#8499ab" />
+          <circle cx="520" cy="198" r="19" fill="#101922" stroke="#2c4256" />
+          <circle cx="520" cy="198" r="7" fill="none" stroke="#8499ab" />
+          <text class="small" x="552" y="193">2× onboard mics</text>
+          <text class="tiny" x="552" y="211">data out on DIN (GPIO20)</text>
+
+          <!-- codec -->
+          <rect class="inner" x="468" y="238" width="212" height="98" rx="6" />
+          <text class="lbl-b" x="486" y="266">CODEC</text>
+          <text class="lbl" x="486" y="288">TLV320AIC3104</text>
+          <text class="tiny" x="486" y="308">I2S in / out · mic input</text>
+          <text class="tiny" x="486" y="324">headphone path → JST (weak)</text>
+          <text class="tiny cyan" x="394" y="308">BCLK</text>
+          <text class="tiny cyan" x="394" y="362">LRCLK</text>
+          <text class="tiny grey" x="394" y="418">DIN · mics</text>
+          <text class="tiny cyan" x="394" y="473">DOUT</text>
+
+          <text class="tiny" x="400" y="374">I2S passes through the HAT — the amp</text>
+          <text class="tiny" x="400" y="390">taps the same three playback lines.</text>
+
+          <!-- JST socket, crossed out -->
+          <text class="tiny" x="400" y="440">JST out = codec headphone path (weak)</text>
+          <rect x="440" y="452" width="150" height="52" rx="5" fill="#2a1414" stroke="#ff5a4e" stroke-width="1.5" stroke-dasharray="6 4" />
+          <line x1="440" y1="452" x2="590" y2="504" stroke="#ff5a4e" stroke-width="3" />
+          <line x1="590" y1="452" x2="440" y2="504" stroke="#ff5a4e" stroke-width="3" />
+          <text class="lbl-b red" x="515" y="483" text-anchor="middle">JST 2.0 SPK</text>
+          <!-- 3.5mm jack -->
+          <rect x="606" y="452" width="86" height="52" rx="5" fill="#101922" stroke="#2c4256" />
+          <circle cx="630" cy="478" r="11" fill="none" stroke="#8499ab" stroke-width="2" />
+          <text class="tiny" x="646" y="474">3.5 mm</text>
+          <text class="tiny" x="646" y="490">jack</text>
+          <text class="tiny" x="606" y="522">headphones still OK</text>
+
+          <text class="small red" x="400" y="556">Speaker MOVES off this socket —</text>
+          <text class="small red" x="400" y="576">do not connect both outputs</text>
+          <text class="small red" x="400" y="596">to one speaker.</text>
+
+          <!-- ================= BLOCK 3: MAX98357A AMP ================= -->
+          <rect class="blk-new" x="780" y="110" width="320" height="500" rx="10" />
+          <circle cx="840" cy="110" r="5.5" fill="#ff5a4e" />
+          <circle cx="962" cy="110" r="5.5" fill="#aab7c2" />
+          <circle cx="780" cy="295" r="5" fill="#38d6e8" />
+          <circle cx="780" cy="350" r="5" fill="#38d6e8" />
+          <circle cx="780" cy="460" r="5" fill="#38d6e8" />
+          <circle cx="1100" cy="300" r="5.5" fill="#ffa63d" />
+          <circle cx="1100" cy="370" r="5.5" fill="#ffa63d" />
+          <text class="ttl" x="800" y="145">MAX98357A AMP</text>
+          <text class="sub" x="800" y="167">Adafruit breakout · I2S Class-D · <tspan class="green">NEW</tspan></text>
+
+          <text class="tiny" x="800" y="192">On the robot, feed Vin from the 5V rail;</text>
+          <text class="tiny" x="800" y="208">amp supply range 2.5–5.5 V.</text>
+
+          <!-- chip -->
+          <rect class="inner" x="828" y="232" width="218" height="140" rx="6" />
+          <text class="lbl-b" x="846" y="260">MAX98357A</text>
+          <text class="small" x="846" y="282">I2S DAC + Class-D amp</text>
+          <text class="small" x="846" y="302">Up to ~3 W into 4 Ω @ 5 V</text>
+          <text class="small amber" x="846" y="330">MCLK: none — the MAX98357A</text>
+          <text class="small amber" x="846" y="348">needs no MCLK wire.</text>
+          <text class="tiny cyan" x="788" y="290">BCLK</text>
+          <text class="tiny cyan" x="788" y="345">LRC</text>
+          <text class="lbl-b orange" x="1092" y="295" text-anchor="end">SPK +</text>
+          <text class="lbl-b orange" x="1092" y="365" text-anchor="end">SPK −</text>
+
+          <text class="tiny cyan" x="788" y="455">DIN ← Pi DOUT</text>
+
+          <!-- GAIN -->
+          <line x1="800" y1="402" x2="1080" y2="402" stroke="#2c4256" />
+          <text class="lbl" x="800" y="428"><tspan class="lbl-b">GAIN</tspan> — leave OPEN = <tspan class="amber">9 dB default</tspan></text>
+          <!-- SD -->
+          <text class="lbl" x="800" y="492"><tspan class="lbl-b">SD</tspan> — leave as the breakout ships:</text>
+          <text class="small" x="800" y="514">onboard 1 MΩ pull-up to Vin sets</text>
+          <text class="small" x="800" y="532">(L+R)/2 mono mix-down.</text>
+          <text class="small red" x="800" y="556">SD below 0.16 V = shutdown;</text>
+          <text class="small red" x="800" y="574">don't ground it.</text>
+          <text class="tiny" x="800" y="598">Speaker screw terminals + / − on the right edge.</text>
+
+          <!-- ================= BLOCK 4: SPEAKER ================= -->
+          <rect class="blk" x="1160" y="110" width="260" height="500" rx="10" />
+          <circle cx="1160" cy="300" r="5.5" fill="#ffa63d" />
+          <circle cx="1160" cy="370" r="5.5" fill="#ffa63d" />
+          <text class="ttl" x="1180" y="145">SPEAKER</text>
+          <text class="sub" x="1180" y="167">Adafruit #3351</text>
+
+          <circle cx="1292" cy="330" r="96" fill="#101922" stroke="#33506e" stroke-width="2" />
+          <circle cx="1292" cy="330" r="58" fill="none" stroke="#2c4256" stroke-width="1.5" />
+          <circle cx="1292" cy="330" r="26" fill="#18222e" stroke="#8499ab" stroke-width="1.5" />
+          <text class="lbl-b orange" x="1176" y="306">+</text>
+          <text class="lbl-b orange" x="1176" y="376">−</text>
+
+          <text class="lbl" x="1292" y="472" text-anchor="middle">3-inch · 4 Ω · 3 W</text>
+          <text class="small" x="1292" y="500" text-anchor="middle">Two terminals only: + and −</text>
+          <text class="small orange" x="1292" y="540" text-anchor="middle">Driven ONLY by the amp now —</text>
+          <text class="small orange" x="1292" y="560" text-anchor="middle">the HAT JST lead stays off.</text>
+          <text class="tiny" x="1292" y="592" text-anchor="middle">Neither lead is a ground.</text>
+
+          <!-- ===== Tap-at-header note (under Pi + HAT) ===== -->
+          <rect x="20" y="635" width="680" height="100" rx="8" fill="#0f2230" stroke="#38d6e8" stroke-width="1" />
+          <text class="lbl-b cyan" x="40" y="662">TAP AT THE HEADER — I2S IS A SHARED BUS</text>
+          <text class="small" x="40" y="686">BCLK, LRCLK and DOUT each fan out to BOTH the HAT codec and the amp.</text>
+          <text class="small" x="40" y="704">Break them out with a stacking header under the HAT, or a solder-tee</text>
+          <text class="small" x="40" y="722">on the header pins. DIN (GPIO20) is not tapped — mic data only.</text>
+
+          <!-- ===== Gain table (under amp) ===== -->
+          <rect x="780" y="635" width="320" height="100" rx="8" fill="#101922" stroke="#2c4256" />
+          <text class="lbl-b" x="796" y="658">GAIN PIN — OUTPUT LEVEL</text>
+          <text class="small" x="796" y="678">GAIN → GND</text><text class="small amber" x="1084" y="678" text-anchor="end">12 dB</text>
+          <text class="small" x="796" y="694">GAIN → GND via 100 kΩ</text><text class="small amber" x="1084" y="694" text-anchor="end">15 dB</text>
+          <text class="small" x="796" y="710">GAIN → Vin</text><text class="small amber" x="1084" y="710" text-anchor="end">6 dB</text>
+          <text class="small" x="796" y="726">GAIN → Vin via 100 kΩ</text><text class="small amber" x="1084" y="726" text-anchor="end">3 dB</text>
+
+          <!-- ===== Under speaker: mono note ===== -->
+          <rect x="1160" y="635" width="260" height="100" rx="8" fill="#101922" stroke="#2c4256" />
+          <text class="lbl-b" x="1176" y="662">MONO BY DEFAULT</text>
+          <text class="small" x="1176" y="686">SD pull-up = (L+R)/2 mix,</text>
+          <text class="small" x="1176" y="704">so one speaker plays both</text>
+          <text class="small" x="1176" y="722">channels summed. No wiring needed.</text>
+
+          <!-- ===== Warning banner ===== -->
+          <rect x="20" y="752" width="1400" height="64" rx="8" fill="#33190f" stroke="#b45a24" stroke-width="1.5" />
+          <text x="720" y="782" text-anchor="middle" style="font:700 16px ui-monospace, Menlo, Consolas, monospace; fill:#ffc44d;">WARNING — CLASS-D BRIDGE OUTPUT: NEITHER SPEAKER LEAD IS GROUND</text>
+          <text x="720" y="804" text-anchor="middle" style="font:12.5px ui-monospace, Menlo, Consolas, monospace; fill:#e8c9a8;">Never tie either speaker lead to GND. The speaker floats between the amp's + and − terminals only.</text>
+        </svg>
+        <p class="diagram-caption">Fig. 1 — Bench wiring. The HAT stays stacked on the Pi; the amp hangs off the same header pins and takes over speaker duty.</p>
+      </div>
+
+      <div class="cols">
+        <section class="panel">
+          <h2><span class="tag">Checklist</span>Wire by wire</h2>
+          <table class="wires">
+            <thead><tr><th>Net</th><th>From</th><th>To</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td class="net net-red">5V</td><td>Pi pin 2</td><td>Amp Vin</td><td class="note">On the robot, feed from the 5V rail. Amp supply 2.5–5.5 V.</td></tr>
+              <tr><td class="net net-grey">GND</td><td>Pi pin 6</td><td>Amp GND</td><td class="note">Common ground with the Pi.</td></tr>
+              <tr><td class="net net-cyan">BCLK</td><td>Pi pin 12 · GPIO18</td><td>HAT codec <em>and</em> amp BCLK</td><td class="note">Shared I2S bit clock — fan-out at the header.</td></tr>
+              <tr><td class="net net-cyan">LRCLK</td><td>Pi pin 35 · GPIO19</td><td>HAT codec <em>and</em> amp LRC</td><td class="note">Shared I2S word clock — fan-out at the header.</td></tr>
+              <tr><td class="net net-cyan">DOUT</td><td>Pi pin 40 · GPIO21</td><td>HAT codec <em>and</em> amp DIN</td><td class="note">Playback data. Amp DIN is fed from Pi DOUT.</td></tr>
+              <tr><td class="net net-grey">DIN</td><td>HAT mics → Pi pin 38 · GPIO20</td><td>—</td><td class="note">Mic data into the Pi only. The amp does not use it — do not tap it.</td></tr>
+              <tr><td class="net net-orange">SPK + / −</td><td>Amp screw terminals</td><td>Speaker #3351 terminals</td><td class="note">Orange pair. Bridge output — neither lead is ground.</td></tr>
+              <tr><td class="net">MCLK</td><td>—</td><td>—</td><td class="note">No wire. The MAX98357A needs no MCLK.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="panel">
+          <h2><span class="tag">Settings</span>GAIN &amp; SD pins</h2>
+          <table class="gain">
+            <tbody>
+              <tr><td>GAIN left open (default)</td><td class="db">9 dB</td></tr>
+              <tr><td>GAIN → GND</td><td class="db">12 dB</td></tr>
+              <tr><td>GAIN → GND via 100 kΩ</td><td class="db">15 dB</td></tr>
+              <tr><td>GAIN → Vin</td><td class="db">6 dB</td></tr>
+              <tr><td>GAIN → Vin via 100 kΩ</td><td class="db">3 dB</td></tr>
+            </tbody>
+          </table>
+          <p class="setting-note"><strong>SD:</strong> leave as the breakout ships — the onboard 1 MΩ pull-up to Vin
+          sets the (L+R)/2 mono mix. <span class="sd-warn">SD below 0.16 V = shutdown; don't ground it.</span></p>
+          <p class="setting-note"><strong>Start at 9 dB gain</strong> and moderate volume: full-scale 3.2 W into a
+          3 W speaker leaves no headroom.</p>
+        </section>
+      </div>
+
+      <div class="warning">
+        <p class="w-title">Warning — Class-D bridge output</p>
+        <p><strong>Neither speaker lead is ground.</strong> Never tie either lead to GND — the speaker connects
+        only between the amp's + and − screw terminals, and the HAT's JST speaker socket stays empty.</p>
+      </div>
+
+      <section class="panel notes">
+        <h2>Notes</h2>
+        <div class="note-item">
+          <h3>NO SOFTWARE CHANGE</h3>
+          <p>The amp listens to the same I2S playback stream as the HAT codec; ALSA still sees card
+          <code>seeed2micvoicec</code>. Both outputs play at once — that's why the speaker moves to the amp
+          and the HAT's JST socket is left empty.</p>
+        </div>
+        <div class="note-item">
+          <h3>WHY ADD THE AMP</h3>
+          <p>On the V2.0 HAT the JST speaker output comes off the codec's headphone path (weak). The
+          MAX98357A delivers up to ~3 W into the 4 Ω speaker at 5 V — real volume for the Wall-E voice.</p>
+        </div>
+        <div class="note-item">
+          <h3>GAIN &amp; HEADROOM</h3>
+          <p>Start at <strong>9 dB gain</strong> and moderate volume: full-scale 3.2 W into a 3 W speaker
+          leaves no headroom. Raise gain later only if the bench voice is still too quiet at sane ALSA levels.</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

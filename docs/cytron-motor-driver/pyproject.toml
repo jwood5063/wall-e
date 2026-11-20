@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cytron-motor-driver-rpi"
+version = "0.1.0"
+description = "Raspberry Pi Python port of CytronMotorDriver"
+requires-python = ">=3.9"
+dependencies = ["gpiozero>=2.0"]
+license = {file = "LICENSE"}
+
+[tool.setuptools]
+py-modules = ["cytron_motor_driver"]
