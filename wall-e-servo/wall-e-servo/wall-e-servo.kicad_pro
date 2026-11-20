@@ -1,18 +1,6 @@
 {
   "board": {
     "3dviewports": [],
-    "ipc2581": {
-      "bom_rev": "",
-      "dist": "",
-      "distpn": "",
-      "internal_id": "",
-      "mfg": "",
-      "mpn": "",
-      "sch_revision": ""
-    },
-    "layer_pairs": [],
-    "layer_presets": [],
-    "viewports": [],
     "design_settings": {
       "defaults": {
         "apply_defaults_to_fp_barcodes": false,
@@ -263,7 +251,19 @@
         }
       ],
       "zones_allow_external_fillets": false
-    }
+    },
+    "ipc2581": {
+      "bom_rev": "",
+      "dist": "",
+      "distpn": "",
+      "internal_id": "",
+      "mfg": "",
+      "mpn": "",
+      "sch_revision": ""
+    },
+    "layer_pairs": [],
+    "layer_presets": [],
+    "viewports": []
   },
   "boards": [],
   "component_class_settings": {
@@ -603,7 +603,7 @@
     "last_paths": {
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "gerbers",
       "specctra_dsn": "",
       "step": "",
       "vrml": ""
