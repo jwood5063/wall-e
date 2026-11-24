@@ -1,8 +1,8 @@
 Part,Status,Spec_or_estimate_g,Measured_g,Count_in_robot_total,Note
 Hiwonder Tank Car Chassis Kit (encoder variant),Delivered 2026-11-06 assembled 2026-11-08,1200,1371,yes,Hiwonder spec: weight 1.2 kg max load 5 kg; as completed by Jim 2026-11-08 WITHOUT extra metal trays: 1371 g (full kit weighed 1584 g incl 22 g bundled board)
 Hiwonder kit motor controller board (bundled),Came with chassis kit,,22,no,NOT USED in this design - Cytron MDD10A drives the motors instead; count only if fitted
-TalentCell 12V 6000 mAh pack (motor rail),Research pick not ordered,380,,yes,Plan: ~380 g
-Anker Laptop Power Bank 25K 165W A1695 (Pi rail),Bought used $97 2026-11-07,595,591,yes,Weighed by Jim 2026-11-09: 591 g (spec 595 g)
+TalentCell YB12011000 12V 11000 mAh pack (motor rail),Bought 2026-11-15 $64.99 Amazon; delivered 2026-11-16 model confirmed,500,520,yes,MEASURED by Jim 2026-11-16: 520 g (spec ~500 g); 12V/6A out ~122 Wh; successor to the 6000 mAh pick whose 3A cap predates the arm pivot
+Anker Laptop Power Bank 25K 165W A1695 (Pi rail),Bought used $97 2026-11-07 - RETIRED from robot 2026-11-18 (travel bank now),595,591,no,Weighed by Jim 2026-11-09: 591 g (spec 595 g); counted OUT since the 2026-11-18 retirement - Pis are Witty Pi-fed from the 12V bus
 Slamtec RPLIDAR C1,Chosen not ordered,110,,yes,Plan: ~110 g
 Benewake TF-Luna,Chosen not ordered,5,,yes,Plan: C1 + TF-Luna approx 115 g
 Orbbec Gemini 2 depth camera,Planned not ordered,98,,yes,Plan: 98 g built-in IMU
@@ -25,3 +25,5 @@ Printed shell / body,Phase 3 Jim's own design,,,yes,Weigh cardboard/foam mockup 
 Printed head pods + lidar pedestal,Design locked,,,yes,
 e-con See3CAM_CU30_CHL_TC_BX,On hand,,,no,BENCH ONLY - do not count in robot total
 Xbox Wireless Controller,On hand,,,no,Handheld - do not count
+Witty Pi 5 HAT+ x2 (one per Pi 5),Decided 2026-11-18 not ordered,,,yes,Weigh on arrival
+Servo hub PCB (ESP32-S3 carrier third board),In design 2026-11-18,,,yes,Weigh when fabbed and fitted

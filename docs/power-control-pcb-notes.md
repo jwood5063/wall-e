@@ -65,12 +65,26 @@ this board does power distribution and regulation.
 
 | Rail | Source | Regulation | Target | Load / sizing notes |
 |---|---|---|---|---|
-| Servo rail | 12V battery | Adjustable buck | **6.8 V fixed after trim** | DS3218/DS3225-class max 6.8 V; stock MG996R max 7.2 V — 6.8 V is the shared sweet spot (corrected 2026-11-14, NOT 7.4 V). Stall ~2.5 A per servo; size regulator 10 A peak / ~6 A continuous, fuse to suit. |
+| Servo rail | 12V battery | Adjustable buck | **6.8 V fixed after trim** | DS3218/DS3225-class max 6.8 V; stock MG996R max 7.2 V — 6.8 V is the shared sweet spot (corrected 2026-11-14, NOT 7.4 V). Stall ~2.5 A per servo; size regulator 10 A peak / ~6 A continuous, fuse to suit. **Distribution moved off this board 2026-11-18:** this board's role ends at the J5 VBAT tap feeding the buck; the buck's output lands on the new **servo hub board** (see below), which carries the servo connectors, ESP32, and rail current sense. |
 | Motor rail | 12V battery | **None — raw battery** | 9–12.6 V as battery gives | Stays switched by the Pololu Big MOSFET HP #2815 (sequencer GPIO14). Do not regulate: MDD10A takes 5–30 V and motor torque wants raw voltage. |
-| 5V accessory rail | 12V battery | Adjustable buck | 5.0–5.1 V | Ring Indoor Cam (5V USB), TF-Luna, small loads. ~3 A class. |
-| Pi 5V rail | Anker A1695 power bank | **Stays off this board by default** | 5 V via Anker pass-through | Pi 5 wants 5 V/5 A; the Anker + dock pass-through top-up already works (confirmed 2026-11-09). Putting the Pi on this board is a deliberate redesign, not a default. |
+| 5V accessory rail | 12V battery | AP63205WU fixed 5 V (U5) | 5.0 V | **LANDED on this board (decided 2026-11-18):** net V5-ACC, fused F6 2 A; Ring Indoor Cam via J13 screw terminal, TF-Luna via J14 JST PH (power only). Always-on by default (Ring dock sentry); power_en pin 5 becomes acc_en for Pico gating. |
+| Pi 5V rail | 12V battery via this board | Witty Pi 5 HAT+ on each Pi (its own DC/DC) | 5 V / 5 A at the Pi | **DECIDED 2026-11-18 (supersedes the Anker scheme):** this board feeds both hats' VIN (6–30 V) from V12-BUS via fused screw terminals **J11 (F4 3 A) / J12 (F5 3 A)**. The Anker is retired from the robot (travel duty) and the PD top-up branch is reverted. The Pico toggles each hat's SWITCH via carrier 2N7002s (J21/J22); hats run schedule = WAIT. Detail: `wall-e-witty-pi-integration-checklist.md`. |
 | Charge path | Dock charger (12.6 V supply) | None | 12.6 V in | Via Pololu Isolated SSR #5421 (sequencer GPIO15), fused both sides per dock page. This board is the natural home for the charger-side connector/fuse. |
 | 3.3 V / sensors | — | Fixed regulator | 3.3 V | Low current; may stay on the carrier instead. Decide once, don't duplicate silently. |
+
+## Servo hub board — third board (decided 2026-11-18)
+
+The servo distribution and the ESP32-S3 live on their own board now (Jim's call,
+2026-11-18 — the arm postdated the power/carrier split). What it means for THIS
+board: the servo rail's only footprint here is the **J5 VBAT tap** to the buck.
+The hub board itself: ESP32-S3 dev board **socketed**; single 6.8 V screw-terminal
+input (6 A cont / 10 A peak, bulk cap at input); 6× 3-pin servo connectors with
+signal + power together; ESP32 logic from its **own AP63205WU 5 V regulator** off
+the rail input (never from the servo side); **INA219 servo current sense in the
+same circuit as this board's INA219s** (Kelvin shunt + straps, on the ESP32's I2C
+bus, 0x40); **EN input from the controller board** (Pico spare GPIO, pulled down —
+the Pico owns servo-rail authority; the enable-authority open question is closed).
+Full IO spec in the build plan's "Servo hub board" section.
 
 ## Design rules carried over from the carrier work
 
